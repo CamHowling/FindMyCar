@@ -1,0 +1,30 @@
+{
+  "name": "findmycar-node",
+  "version": "0.0.0",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cf-deployment-tracker-client": "*",
+    "commander": "^2.6.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "http-post": "^0.1.1",
+    "http-proxy": "^1.8.1",
+    "passport": "^0.4.1",
+    "socket.io": "^2.3.0"
+  },
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WolfsMind/FindMyCar.git"
+  },
+  "description": "Current TODO for project content",
+  "bugs": {
+    "url": "https://github.com/WolfsMind/FindMyCar/issues"
+  },
+  "homepage": "https://github.com/WolfsMind/FindMyCar#readme",
+  "author": "Cameron",
+  "license": "ISC"
+}

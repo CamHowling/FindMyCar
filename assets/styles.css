@@ -1,0 +1,39 @@
+
+/*
+Colours:
+https://lospec.com/palette-list/curiosities << using this one currently
+https://lospec.com/palette-list/neon-space  << backup
+
+46425e purple
+15788c dark blue
+00b9be blue
+ffeecc white
+ffb0a3 orange
+ff6973 red
+*/
+
+.helloInput {
+    width: 200px;
+  }
+  
+  .title{
+    color: #ffeecc;
+  }
+  .mainText{
+    color: #ffeecc;
+  }
+  
+  body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background-color: #15788c;
+  
+  }
+  
+  .page-footer{
+    background-color: #15788c;
+  }
+  main {
+    flex: 1 0 auto;
+  }

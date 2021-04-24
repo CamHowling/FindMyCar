@@ -6,15 +6,16 @@ let http = require('http').createServer(app);
 let io = require('socket.io')(http);
 
 
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 5000;
 
 //Launch using directory
-app.use(express.static(__dirname + '/FindMyCar'));
+app.use(express.static(__dirname + '/assets'));
 
 app.get("/test", function (request, response) {
   var user_name = request.query.user_name; //this query may not work
   response.end("Hello " + user_name + "!"); //this probably not super useful
 });
+
 
 
 //socket test

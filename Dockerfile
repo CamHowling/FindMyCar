@@ -1,10 +1,10 @@
 FROM node:10-alpine
 
-WORKDIR /app
+WORKDIR /
 
 COPY . .
 
-EXPOSE 8080
+EXPOSE 5000
 
 RUN npm install
 

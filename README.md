@@ -1,25 +1,12 @@
 Current TODO for project content
 
-Create basic web interface html page
-    this will need to use some form of CSS (which may be able to be downloaded/derived from Alessios basic)
-    It can be largely based on the index.html from the boilerplate (and will need to use some of the JS from the envy.js file)
-    will probably need to establish a server.js file as well
-
 Website functionality
     Connect to a mysqlDB which will be designed quickly for storage of carparks, floors, and so on
     pathfinding can come later
+    host an AR app that places the car at an appropriate location
 
-Currently unnecessary files
-    
+Establish Watchtower continuous deployment
 
-Build assets folder
+Attach DB API
 
-
-Each folder in the code structure should reflect each node
-
-Controller //API endpoints
-    car-space.js
-    user.js
-Model
-    car-space.js
-    user.js
+Move Passport content to server.js
