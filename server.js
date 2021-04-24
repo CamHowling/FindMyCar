@@ -24,6 +24,8 @@ app.get('/carspace/:id', retrieveCarSpace);
 app.get('/carspace', retrieveCarSpaces);
 
 //fetch requests http will need modification
+
+/*
 app.post('/user', function (req, res) {
   fetch('http://api-server-hostname:api-server-port/user', {
       method: 'POST',
@@ -45,6 +47,7 @@ app.get('/user/:id-:firstname', function (req, res) {
       res.render('/error/error.pug', { error: error })
   })
 })
+*/
 
 //socket test
 io.on('connection', (socket) => {
