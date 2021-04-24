@@ -13,3 +13,13 @@ Currently unnecessary files
     
 
 Build assets folder
+
+
+Each folder in the code structure should reflect each node
+
+Controller //API endpoints
+    car-space.js
+    user.js
+Model
+    car-space.js
+    user.js
