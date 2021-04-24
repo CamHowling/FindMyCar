@@ -9,6 +9,7 @@
     "express-session": "^1.17.1",
     "http-post": "^0.1.1",
     "http-proxy": "^1.8.1",
+    "mysql": "^2.18.1",
     "passport": "^0.4.1",
     "socket.io": "^2.3.0"
   },

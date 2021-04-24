@@ -6,7 +6,10 @@ Website functionality
     host an AR app that places the car at an appropriate location
 
 Establish Watchtower continuous deployment
+    currently can't push to dockerhub in windows, will probably have to do via VM
 
 Attach DB API
 
 Move Passport content to server.js
+
+auto deployment 

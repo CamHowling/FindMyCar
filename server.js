@@ -11,12 +11,40 @@ var port = process.env.PORT || 5000;
 //Launch using directory
 app.use(express.static(__dirname + '/assets'));
 
+//testing directory.. not sure what to do with it yet
 app.get("/test", function (request, response) {
-  var user_name = request.query.user_name; //this query may not work
-  response.end("Hello " + user_name + "!"); //this probably not super useful
+  var user_name = request.query.user_name; 
+  response.end("Hello " + user_name + "!");
 });
 
+//express and pug stuff
+app.set('view engine', 'pug');
+app.set('views', './views');
+app.get('/carspace/:id', retrieveCarSpace);
+app.get('/carspace', retrieveCarSpaces);
 
+//fetch requests http will need modification
+app.post('/user', function (req, res) {
+  fetch('http://api-server-hostname:api-server-port/user', {
+      method: 'POST',
+      body: req.body,
+  }).json(json => {
+      res.render('/user/user.pug', json)
+  }).error(error => {
+      res.render('/error/error.pug', { error: error })
+  });
+})
+
+app.get('/user/:id-:firstname', function (req, res) {
+  fetch('http://api-server-hostname:api-server-port/user/' + req.params['id'], {
+      method: 'GET',
+      body: user,
+  }).json(json => {
+      res.render('/user/user.pug', json)
+  }).error(error => {
+      res.render('/error/error.pug', { error: error })
+  })
+})
 
 //socket test
 io.on('connection', (socket) => {
@@ -41,32 +69,3 @@ require("cf-deployment-tracker-client").track();
 
 //notes about this file
 //basic server express node.js file, some pieces may not be needed
-//needs to add some element of mySQL
-
-/*
-
-//create mysql instance on server
-//needs replacement/user input for username/password and possibly host?
-
-var mysql = require('mysql');
-
-var con = mysql.createConnection({
-    host: "localhost",
-    user: "yourusername",
-    password: "your password"
-});
-
-con.connect(function(err)){
-    if(err) throw err;
-    console.log("Connected!");
-
-    //not sure if this needs to be inside the con.connect to function
-    con.query(sql, function (err, result) {
-    if (err) throw err;
-    console.log("Result: " + result);
-
-  });
-
-}
-
-*/
