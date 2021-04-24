@@ -17,6 +17,7 @@ app.get("/test", function (request, response) {
   response.end("Hello " + user_name + "!");
 });
 
+/*
 //express and pug stuff
 app.set('view engine', 'pug');
 app.set('views', './views');
@@ -25,7 +26,7 @@ app.get('/carspace', retrieveCarSpaces);
 
 //fetch requests http will need modification
 
-/*
+
 app.post('/user', function (req, res) {
   fetch('http://api-server-hostname:api-server-port/user', {
       method: 'POST',
