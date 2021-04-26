@@ -1,3 +1,4 @@
+// database/dbroutes.js
 const flash = require("express-flash");
 
 var mysql = require('mysql');
@@ -6,22 +7,20 @@ var connection = mysql.createConnection(dbconfig.connection);
 
 connection.query('USE ' + dbconfig.database);
 
-// database/dbroutes.js
+
 module.exports = function(app, passport) {
 
-	// =====================================
 	// HOME PAGE (with login links) ========
-	// =====================================
+
 	app.get('/', function(req, res) {
 		res.render('index.ejs'); // load the index.ejs file
 	});
 
-	// =====================================
+
 	// LOGIN ===============================
-	// =====================================
+
 	// show the login form
 	app.get('/login', function(req, res) {
-		// render the page and pass in any flash data if it exists
 		res.render('user/login.ejs', { message: req.flash('loginMessage') });
 	});
 
@@ -42,27 +41,23 @@ module.exports = function(app, passport) {
         res.redirect('/');
     });
 	
-	// =====================================
+
 	// SIGNUP ==============================
-	// =====================================
 	// show the signup form
 	app.get('/signup', function(req, res) {
-		// render the page and pass in any flash data if it exists
 		res.render('user/signup.ejs', { message: req.flash('signupMessage') });	
 	});
 
 	// process the signup form
 	app.post('/signup', passport.authenticate('local-signup', {
-		successRedirect : '/profile', // redirect to the secure profile section
-		failureRedirect : '/signup', // redirect back to the signup page if there is an error
-		failureFlash : true // allow flash messages
+		successRedirect : '/profile', 
+		failureRedirect : '/signup', 
+		failureFlash : true 
 	}));
 
-	// =====================================
+
 	// PROFILE SECTION =========================
-	// =====================================
-	// we will want this protected so you have to be logged in to visit
-	// we will use route middleware to verify this (the isLoggedIn function)
+
 	app.get('/profile', isLoggedIn, function(req, res) {
 		res.render('user/profile.ejs', {
 			user : req.user // get the user out of session and pass to template
@@ -71,7 +66,6 @@ module.exports = function(app, passport) {
 
 	// process the signup form
 	app.post('/profile', isLoggedIn, function(req, res) {
-		//console.log(req.body.carlocation);
 		connection.query("UPDATE users SET carlocation = ? WHERE id = ?",[req.body.carlocation, req.user.id], function(err, rows) {
 			if (err)
 				return done(err);
@@ -90,19 +84,14 @@ module.exports = function(app, passport) {
 		});
 	});
 
-
-	// =====================================
 	// LOGOUT ==============================
-	// =====================================
 	app.get('/logout', function(req, res) {
 		req.logout();
 		res.redirect('/');
 	});
 	
-	
-	// =====================================
 	// ERROR ===============================
-	// =====================================
+
 	app.get('/error', function(req, res){
 		console.log(req.flash('error'));
 		res.send();		
