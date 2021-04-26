@@ -8,13 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: Login to DockerHub
-        run:  echo !{{ secrets.DOCKERHUBPASSWORD }} | docker login
-        -u ${{ secrets.DOCKER_USERNAME }} --password=stdin
-      - name: Build the docker image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/
-        findmycar .
-      - name: Publish to Docker hub
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/
-        findmycar .
+      - id: Login to DockerHub
+        run: echo !{{ secrets.DOCKERHUBPASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password=stdin
+      - id: Build the docker image
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/ findmycar .
+      - id: Publish to Docker hub
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/ findmycar .
         
