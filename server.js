@@ -30,9 +30,6 @@ app.use(bodyParser.json());
 
 app.set('view engine', 'ejs'); //ejs for templates - may replace with pug templates
 
-//Launch using directory
-//app.use(express.static(__dirname + '/assets')); //need to re-establish after SQL template used
-
 app.use(session({
 	secret: 'findmycar', //rename?
 	resave: true,
@@ -42,12 +39,6 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
-
-//testing directory.. not sure what to do with it yet
-app.get("/test", function (request, response) {
-  var user_name = request.query.user_name; 
-  response.end("Hello " + user_name + "!");
-});
 
 // Routes ---------------------------------------------
 

@@ -1,6 +1,6 @@
 services:
     web:
-        build: .
+        image: wolfsmind/findmycar:latest
         ports: 
             - "5000:5000"
         links:
