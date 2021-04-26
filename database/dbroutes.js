@@ -1,3 +1,11 @@
+const flash = require("express-flash");
+
+var mysql = require('mysql');
+var dbconfig = require('./config/database.js');
+var connection = mysql.createConnection(dbconfig.connection);
+
+connection.query('USE ' + dbconfig.database);
+
 // database/dbroutes.js
 module.exports = function(app, passport) {
 
@@ -13,9 +21,8 @@ module.exports = function(app, passport) {
 	// =====================================
 	// show the login form
 	app.get('/login', function(req, res) {
-
 		// render the page and pass in any flash data if it exists
-		res.render('login.ejs', { message: req.flash('loginMessage') });
+		res.render('user/login.ejs', { message: req.flash('loginMessage') });
 	});
 
 	// process the login form
@@ -34,14 +41,14 @@ module.exports = function(app, passport) {
             }
         res.redirect('/');
     });
-
+	
 	// =====================================
 	// SIGNUP ==============================
 	// =====================================
 	// show the signup form
 	app.get('/signup', function(req, res) {
 		// render the page and pass in any flash data if it exists
-		res.render('signup.ejs', { message: req.flash('signupMessage') });
+		res.render('user/signup.ejs', { message: req.flash('signupMessage') });	
 	});
 
 	// process the signup form
@@ -57,10 +64,32 @@ module.exports = function(app, passport) {
 	// we will want this protected so you have to be logged in to visit
 	// we will use route middleware to verify this (the isLoggedIn function)
 	app.get('/profile', isLoggedIn, function(req, res) {
-		res.render('profile.ejs', {
+		res.render('user/profile.ejs', {
 			user : req.user // get the user out of session and pass to template
 		});
 	});
+
+	// process the signup form
+	app.post('/profile', isLoggedIn, function(req, res) {
+		//console.log(req.body.carlocation);
+		connection.query("UPDATE users SET carlocation = ? WHERE id = ?",[req.body.carlocation, req.user.id], function(err, rows) {
+			if (err)
+				return done(err);
+		});
+		let user=req.user;
+		connection.query("SELECT * FROM users WHERE id = ?",[req.user.id], function(err, rows) {
+			if (err)
+				return done(err);
+			if (rows.length>0)
+				user = rows[0];
+			else
+				return done(Error("User not found"));
+		})
+		res.render('user/profile.ejs', {
+			user : user // get the user out of session and pass to template
+		});
+	});
+
 
 	// =====================================
 	// LOGOUT ==============================
@@ -69,6 +98,16 @@ module.exports = function(app, passport) {
 		req.logout();
 		res.redirect('/');
 	});
+	
+	
+	// =====================================
+	// ERROR ===============================
+	// =====================================
+	app.get('/error', function(req, res){
+		console.log(req.flash('error'));
+		res.send();		
+	});
+
 };
 
 // route middleware to make sure
